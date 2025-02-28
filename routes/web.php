@@ -36,6 +36,10 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth', 'role:Owner'])->group(function () {
     Route::get('/owner/dashboard', [OwnerController::class, 'OwnerDashboard'])->name('owner.dashboard');
     Route::get('/owner/employee', [OwnerController::class, 'Employee'])->name('owner.employee');
+    Route::get('/employees', [OwnerController::class, 'Employeeindex'])->name('employee.index');
+    Route::post('/owner/update-verification', [OwnerController::class, 'updateVerification'])->name('owner.updateVerification');
+
+
 });
 
 Route::middleware(['auth', 'role:Branch Manager'])->group(function () {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cabang;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -31,7 +32,11 @@ class AuthController extends Controller
         }
 
         $roles = Role::where('name', '!=', 'Owner')->get();
-        return view('auth.register', compact('roles'));
+        $cabangs = Cabang::all();
+        return view('auth.register', compact(
+            'roles',
+            'cabangs',
+        ));
     }
 
     public function register(Request $request)

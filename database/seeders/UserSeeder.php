@@ -24,6 +24,7 @@ class UserSeeder extends Seeder
             'email' => 'rendylutfiprabowo123@gmail.com',
             'password' => Hash::make('password123'), // Ganti dengan password yang aman
             'role_id' => $ownerRole->id,
+            
             'is_verified' => true, // Tandai sebagai sudah diverifikasi
             'terms' => true, // Tandai sebagai sudah diverifikasi
             'email_verified_at' => now(),
@@ -34,6 +35,8 @@ class UserSeeder extends Seeder
             'email' => 'bm123@gmail.com',
             'password' => Hash::make('password123'), // Ganti dengan password yang aman
             'role_id' => 2,
+            'cabang_id' => 1,
+            'cabang_id' => 1,
             'is_verified' => true, // Tandai sebagai sudah diverifikasi
             'terms' => true, // Tandai sebagai sudah diverifikasi
             'email_verified_at' => now(),
@@ -44,6 +47,7 @@ class UserSeeder extends Seeder
             'email' => 'cashier123@gmail.com',
             'password' => Hash::make('password123'), // Ganti dengan password yang aman
             'role_id' => 3,
+            'cabang_id' => 2,
             'is_verified' => true, // Tandai sebagai sudah diverifikasi
             'terms' => true, // Tandai sebagai sudah diverifikasi
             'email_verified_at' => now(),
@@ -54,6 +58,7 @@ class UserSeeder extends Seeder
             'email' => 'productionofficer123@gmail.com',
             'password' => Hash::make('password123'), // Ganti dengan password yang aman
             'role_id' => 4,
+            
             'is_verified' => true, // Tandai sebagai sudah diverifikasi
             'terms' => true, // Tandai sebagai sudah diverifikasi
             'email_verified_at' => now(),
@@ -64,6 +69,7 @@ class UserSeeder extends Seeder
             'email' => 'logisticofficer123@gmail.com',
             'password' => Hash::make('password123'), // Ganti dengan password yang aman
             'role_id' => 5,
+            
             'is_verified' => true, // Tandai sebagai sudah diverifikasi
             'terms' => true, // Tandai sebagai sudah diverifikasi
             'email_verified_at' => now(),

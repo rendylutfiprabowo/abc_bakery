@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',        // Menambahkan role_id ke fillable
+        'cabang_id',        // Menambahkan cabang_id ke fillable
         'is_verified',    // Menambahkan is_verified ke fillable
         'terms',    // Menambahkan is_verified ke fillable
     ];
@@ -53,9 +54,13 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'role_id');
     }
 
-    // Relasi dengan tabel sessions (one-to-many)
     public function sessions()
     {
         return $this->hasMany(Session::class);
+    }
+
+    public function cabang()
+    {
+        return $this->belongsTo(Cabang::class, 'cabang_id');
     }
 }

@@ -31,6 +31,26 @@
             </select>
         </div>
 
+        <div class="mb-3">
+            <label for="role_id" class="form-label">Pilih Kota</label>
+            <select class="form-control" id="role_id" name="role_id" required>
+                <option value="">-- Pilih Cabang --</option>
+                @foreach ($cabangs as $cabang)
+                    <option value="{{ $cabang->id }}">{{ $cabang->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="role_id" class="form-label">Pilih Cabang</label>
+            <select class="form-control" id="role_id" name="role_id" required>
+                <option value="">-- Pilih Cabang --</option>
+                @foreach ($cabangs as $cabang)
+                    <option value="{{ $cabang->id }}">{{ $cabang->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
         <div class="mb-3 form-password-toggle">
             <label class="form-label" for="password">Password</label>
             <div class="input-group input-group-merge">

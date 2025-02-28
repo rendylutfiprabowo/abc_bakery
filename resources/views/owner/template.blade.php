@@ -19,6 +19,16 @@
                     <!-- Content -->
 
                     <div class="container-fluid flex-grow-1 container-p-y">
+                        <nav aria-label="breadcrumb" >
+                            <ol class="breadcrumb breadcrumb-style1 mb-4">
+                                <li class="breadcrumb-item">
+                                    <a href="/">owner</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="/owner/{{ $title }}">{{ $title }}</a>
+                                </li>
+                            </ol>
+                        </nav>
                         @yield('content')
                     </div>
                     <!-- / Content -->
