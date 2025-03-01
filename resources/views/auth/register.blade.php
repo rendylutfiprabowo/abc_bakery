@@ -29,13 +29,13 @@
             <div class="mb-3">
                 <label for="name" class="form-label">Nama Lengkap</label>
                 <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan username"
-                    required autofocus />
+                    required autofocus value="{{ old('name') }}" />
             </div>
 
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan email"
-                    required />
+                    required value="{{ old('email') }}" />
             </div>
 
             <div class="mb-3">
@@ -43,8 +43,13 @@
                 <select class="form-control" id="role_id" name="role_id" required onchange="toggleFields()">
                     <option value="">-- Pilih Role --</option>
                     @foreach ($roles as $role)
-                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                        <option value="{{ $role->id }}" {{ old('role_id') == $role->id ? 'selected' : '' }}>
+                            {{ $role->name }}
+                        </option>
                     @endforeach
+                    {{-- @foreach ($roles as $role)
+                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                    @endforeach --}}
                 </select>
             </div>
 
@@ -55,8 +60,14 @@
                     <select class="form-control" id="provinsi_id" name="provinsi_id">
                         <option value="">-- Pilih Provinsi --</option>
                         @foreach ($provinsi as $p)
-                            <option value="{{ $p->provinsi_id }}">{{ $p->provinsi }}</option>
+                            <option value="{{ $p->provinsi_id }}"
+                                {{ old('provinsi_id') == $p->provinsi_id ? 'selected' : '' }}>
+                                {{ $p->provinsi }}
+                            </option>
                         @endforeach
+                        {{-- @foreach ($provinsi as $p)
+                            <option value="{{ $p->provinsi_id }}">{{ $p->provinsi }}</option>
+                        @endforeach --}}
                     </select>
                 </div>
 
@@ -153,6 +164,28 @@
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
+            $(document).ready(function() {
+                let selectedProvinsi = "{{ old('provinsi_id') }}";
+                let selectedKota = "{{ old('kota_id') }}";
+                let selectedCabang = "{{ old('cabang_id') }}";
+
+                if (selectedProvinsi) {
+                    $('#provinsi_id').val(selectedProvinsi).trigger('change');
+                }
+
+                if (selectedKota) {
+                    setTimeout(function() {
+                        $('#kota_id').val(selectedKota).trigger('change');
+                    }, 1000); // Tunggu data kota dimuat
+                }
+
+                if (selectedCabang) {
+                    setTimeout(function() {
+                        $('#cabang_id').val(selectedCabang);
+                    }, 1500); // Tunggu data cabang dimuat
+                }
+            });
+
             $(document).ready(function() {
                 console.log("Script berjalan!");
 

@@ -58,7 +58,7 @@ class AuthController extends Controller
             'role_id' => 'required|exists:roles,id',
             'password' => [
                 'required',
-                'min:6',    
+                'min:6',
                 'confirmed',
                 'regex:/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/'
             ],
@@ -69,6 +69,24 @@ class AuthController extends Controller
             'password.regex' => 'Password harus terdiri dari huruf besar dan kecil, angka, dan karakter khusus.',
             'terms.accepted' => 'Mohon setujui kebijakan & ketentuan privasi.',
         ]);
+
+        try {
+            // Buat user baru
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role_id' => $request->role_id,
+                'cabang_id' => $request->cabang_id,
+                'is_verified' => false,
+                'terms' => true,
+            ]);
+
+            return redirect()->route('login')->with('success', 'Registrasi berhasil! Mohon hubungi owner untuk verifikasi akun.');
+        } catch (\Exception $e) {
+
+            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan saat registrasi. Silakan coba lagi.');
+        }
 
         // Buat user baru
         $user = User::create([

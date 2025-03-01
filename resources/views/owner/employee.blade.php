@@ -54,7 +54,7 @@
                                 {{ $item->cabang->name ?? '-' }}
                             </td>
                             <td>
-                                {{ $item->cabang->kota ?? '-' }}
+                                {{ $item->cabang->kota->kota ?? '-' }}
                             </td>
                             <td class="d-flex justify-content-center">
                                 <div class="form-check form-switch">
