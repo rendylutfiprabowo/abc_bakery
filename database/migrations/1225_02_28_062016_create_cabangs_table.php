@@ -11,10 +11,12 @@ return new class extends Migration
         Schema::create('cabangs', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique(); // Nama cabang harus unik
-            $table->string('kota');
+            $table->foreignId('kota_id')->nullable()->constrained('kotas')->onDelete('set null');
+            $table->foreignId('provinsi_id')->nullable()->constrained('kotas')->onDelete('set null');
             $table->timestamps();
         });
     }
+
 
     public function down(): void
     {

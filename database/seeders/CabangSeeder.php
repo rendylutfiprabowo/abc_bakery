@@ -15,32 +15,38 @@ class CabangSeeder extends Seeder
     {
         Cabang::create([
             'name' => 'Rajabasa',
-            'kota' => 'Bandar Lampung'
+            'kota_id' => '139',
+            'provinsi_id' => '18'
         ]);
 
         Cabang::create([
             'name' => 'Kimaja',
-            'kota' => 'Bandar Lampung'
+            'kota_id' => '139',
+            'provinsi_id' => '18'
         ]);
 
         Cabang::create([
             'name' => 'ZA Pagaralam',
-            'kota' => 'Bandar Lampung'
+            'kota_id' => '139',
+            'provinsi_id' => '18'
         ]);
 
         Cabang::create([
             'name' => 'Kemiling',
-            'kota' => 'Bandar Lampung'
+            'kota_id' => '139',
+            'provinsi_id' => '18'
         ]);
 
         Cabang::create([
             'name' => 'Kedaton',
-            'kota' => 'Bandar Lampung'
+            'kota_id' => '139',
+            'provinsi_id' => '18'
         ]);
 
         Cabang::create([
             'name' => 'Raden Intan',
-            'kota' => 'Bandar Lampung'
+            'kota_id' => '139',
+            'provinsi_id' => '18'
         ]);
     }
 }

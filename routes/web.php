@@ -6,12 +6,22 @@ use App\Http\Controllers\CashierController;
 use App\Http\Controllers\LogisticOfficerController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\ProductionOfficerController;
+use App\Models\Cabang;
+use App\Models\Kota;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 //register
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.store');
+Route::get('/get-kota/{provinsi_id}', function ($provinsi_id) {
+    $kota = Kota::where('provinsi_id', $provinsi_id)->get();
+    return response()->json($kota);
+});
+Route::get('/get-cabang/{kota_id}', function ($kota_id) {
+    $cabang = Cabang::where('kota_id', $kota_id)->get();
+    return response()->json($cabang);
+});
 
 //login
 Route::get('/login', function () {
@@ -38,8 +48,6 @@ Route::middleware(['auth', 'role:Owner'])->group(function () {
     Route::get('/owner/employee', [OwnerController::class, 'Employee'])->name('owner.employee');
     Route::get('/employees', [OwnerController::class, 'Employeeindex'])->name('employee.index');
     Route::post('/owner/update-verification', [OwnerController::class, 'updateVerification'])->name('owner.updateVerification');
-
-
 });
 
 Route::middleware(['auth', 'role:Branch Manager'])->group(function () {

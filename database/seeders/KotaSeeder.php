@@ -23,9 +23,10 @@ class KotaSeeder extends Seeder
         foreach ($csv as $row) {
             Kota::create([
                 'id' => $row[0],
-                'kode_wilayah' => $row[1],
-                'name' => $row[2],
-                'province' => $row[3],
+                'provinsi_id' => $row[1],
+                'kota_id' => $row[2],
+                'kota' => $row[3],
+                'provinsi' => $row[4],
             ]);
         }
     }

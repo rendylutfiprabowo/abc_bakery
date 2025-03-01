@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cabang;
+use App\Models\Kota;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -32,10 +33,19 @@ class AuthController extends Controller
         }
 
         $roles = Role::where('name', '!=', 'Owner')->get();
-        $cabangs = Cabang::all();
+        $cabangs = Cabang::with('kota', 'provinsi')->get();
+        $provinsi = Kota::select('provinsi_id', 'provinsi')->distinct()->get();
+        $kota = Kota::select('kota_id', 'kota')->distinct()->get();
+        // dd($provinsi->pluck('provinsi_id'));
+        // $kota = $cabangs->pluck('kota.provinsi');
+        // $provinsi = $cabangs->pluck('kota.provinsi');
+        // $id_kota = $cabangs->pluck('kota_id');
+        // dd($kota);
         return view('auth.register', compact(
             'roles',
             'cabangs',
+            'kota',
+            'provinsi',
         ));
     }
 
@@ -46,7 +56,18 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'role_id' => 'required|exists:roles,id',
-            'password' => 'required|min:6|confirmed',
+            'password' => [
+                'required',
+                'min:6',    
+                'confirmed',
+                'regex:/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/'
+            ],
+            // 'cabang_id' => 'required|exists:cabangs,id',
+            'terms' => 'accepted',
+        ], [
+            'password.confirmed' => 'Password dan Konfirmasi Password harus sama.',
+            'password.regex' => 'Password harus terdiri dari huruf besar dan kecil, angka, dan karakter khusus.',
+            'terms.accepted' => 'Mohon setujui kebijakan & ketentuan privasi.',
         ]);
 
         // Buat user baru
@@ -55,6 +76,7 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role_id' => $request->role_id,
+            'cabang_id' => $request->cabang_id,
             'is_verified' => false,
             'terms' => true,
         ]);

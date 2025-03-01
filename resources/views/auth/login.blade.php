@@ -1,6 +1,15 @@
 @extends('auth.auth_template') {{-- Menggunakan template main.blade.php --}}
 
 @section('content') {{-- Isi konten halaman --}}
+    @if (session()->has('success'))
+        <div class="card-body m-0 p-0">
+            <div class="alert alert-success" role="alert">
+                {{ session('success') }}
+            </div>
+        </div>
+    @endif
+
+
     <h4 class="mb-2">Selamat Datang! 👋</h4>
     <p class="mb-4">Silahkan masuk menggunakan akun yang telah divalidasi.</p>
 

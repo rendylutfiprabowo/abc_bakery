@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('kotas', function (Blueprint $table) {
             $table->id();
-            $table->float('kode_wilayah');
-            $table->string('name');
-            $table->string('province');
+            $table->integer('provinsi_id');
+            $table->integer('kota_id');
+            $table->string('kota');
+            $table->string('provinsi');
             $table->timestamps();
         });
     }
