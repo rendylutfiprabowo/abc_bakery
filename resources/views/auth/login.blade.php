@@ -1,6 +1,7 @@
 @extends('auth.auth_template') {{-- Menggunakan template main.blade.php --}}
 
-@section('content') {{-- Isi konten halaman --}}
+@section('content')
+    {{-- Isi konten halaman --}}
     @if (session()->has('success'))
         <div class="card-body m-0 p-0">
             <div class="alert alert-success" role="alert">
@@ -8,7 +9,13 @@
             </div>
         </div>
     @endif
-
+    @if (session('errors'))
+        <div class="alert alert-danger">
+            @foreach (session('errors')->all() as $error)
+                {{ $error }}
+            @endforeach
+        </div>
+    @endif
 
     <h4 class="mb-2">Selamat Datang! 👋</h4>
     <p class="mb-4">Silahkan masuk menggunakan akun yang telah divalidasi.</p>
@@ -20,9 +27,9 @@
             <label for="email" class="form-label">Email</label>
             <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email"
                 value="{{ old('email') }}" autofocus />
-            @error('email')
+            {{-- @error('email')
                 <small class="text-danger">{{ $message }}</small>
-            @enderror
+            @enderror --}}
         </div>
 
         <div class="mb-3 form-password-toggle">
@@ -37,9 +44,9 @@
                     aria-describedby="password" />
                 <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
             </div>
-            @error('password')
+            {{-- @error('password')
                 <small class="text-danger">{{ $message }}</small>
-            @enderror
+            @enderror --}}
         </div>
 
         <div class="mb-3">
@@ -54,16 +61,7 @@
             <button class="btn btn-primary d-grid w-100" type="submit">Masuk</button>
         </div>
 
-        <!-- Menampilkan error login -->
-        @if (session('errors'))
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach (session('errors')->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+
     </form>
 
 

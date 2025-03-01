@@ -5,6 +5,13 @@
     {{-- Isi konten halaman --}}
 
     <!-- Hoverable Table rows -->
+    @if (session()->has('success'))
+        <div class="card-body m-0 p-0">
+            <div class="alert alert-success" role="alert">
+                {{ session('success') }}
+            </div>
+        </div>
+    @endif
     <div class="card">
         <div class="container p-0 my-3">
             <div class="row align-items-center px-0">

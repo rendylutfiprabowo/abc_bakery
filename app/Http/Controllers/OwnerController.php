@@ -43,9 +43,9 @@ class OwnerController extends Controller
             $user->is_verified = $request->is_verified;
             $user->save();
 
-            return response()->json(['message' => 'Verifikasi berhasil diperbarui.']);
+            return response()->json(['success' => 'Verifikasi berhasil diperbarui.']);
         }
 
-        return response()->json(['message' => 'User tidak ditemukan.'], 404);
+        return response()->json(['success' => 'User tidak ditemukan.'], 404);
     }
 }   

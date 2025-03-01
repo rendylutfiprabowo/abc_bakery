@@ -43,26 +43,26 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 //owner
-Route::middleware(['auth', 'role:Owner'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:Owner'])->group(function () {
     Route::get('/owner/dashboard', [OwnerController::class, 'OwnerDashboard'])->name('owner.dashboard');
     Route::get('/owner/employee', [OwnerController::class, 'Employee'])->name('owner.employee');
     Route::get('/employees', [OwnerController::class, 'Employeeindex'])->name('employee.index');
     Route::post('/owner/update-verification', [OwnerController::class, 'updateVerification'])->name('owner.updateVerification');
 });
 
-Route::middleware(['auth', 'role:Branch Manager'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:Branch Manager'])->group(function () {
     Route::get('/branchmanager/dashboard', [BranchManagerController::class, 'BranchManagerDashboard'])->name('branchmanager.dashboard');
 });
 
-Route::middleware(['auth', 'role:Cashier'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:Cashier'])->group(function () {
     Route::get('/cashier/dashboard', [CashierController::class, 'CashierDashboard'])->name('cashier.dashboard');
 });
 
-Route::middleware(['auth', 'role:Production Officer'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:Production Officer'])->group(function () {
     Route::get('/productionofficer/dashboard', [ProductionOfficerController::class, 'ProductionOfficerDashboard'])->name('productionofficer.dashboard');
 });
 
-Route::middleware(['auth', 'role:Logistic Officer'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:Logistic Officer'])->group(function () {
     Route::get('/logisticofficer/dashboard', [LogisticOfficerController::class, 'LogisticOfficerDashboard'])->name('logisticofficer.dashboard');
 });
 

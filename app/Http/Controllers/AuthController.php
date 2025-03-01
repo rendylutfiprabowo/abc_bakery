@@ -81,7 +81,6 @@ class AuthController extends Controller
                 'is_verified' => false,
                 'terms' => true,
             ]);
-
             return redirect()->route('login')->with('success', 'Registrasi berhasil! Mohon hubungi owner untuk verifikasi akun.');
         } catch (\Exception $e) {
 
@@ -132,6 +131,19 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
+        // Ambil user berdasarkan email
+        $user = User::where('email', $credentials['email'])->first();
+
+        // Jika user tidak ditemukan
+        if (!$user) {
+            return back()->withErrors(['email' => 'Email tidak ditemukan.'])->withInput();
+        }
+
+        // Jika user belum diverifikasi
+        if (!$user->is_verified) {
+            return back()->withErrors(['email' => 'Akun Anda belum diverifikasi. Silakan hubungi admin.'])->withInput();
+        }
+
         // Ambil status Remember Me
         $remember = $request->has('remember');
 
@@ -141,7 +153,7 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'Email atau password salah.',
+            'error' => 'Email atau password salah.',
         ])->withInput();
     }
 
