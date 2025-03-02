@@ -39,7 +39,7 @@
             </div>
 
             <div class="mb-3">
-                <label for="role_id" class="form-label">Pilih Role</label>
+                <label for="role_id" class="form-label">Pilih Jabatan / Posisi</label>
                 <select class="form-control" id="role_id" name="role_id" required onchange="toggleFields()">
                     <option value="">-- Pilih Role --</option>
                     @foreach ($roles as $role)

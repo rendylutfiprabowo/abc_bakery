@@ -45,23 +45,33 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 //owner
 Route::middleware(['auth', 'verified', 'role:Owner'])->group(function () {
     Route::get('/owner/dashboard', [OwnerController::class, 'OwnerDashboard'])->name('owner.dashboard');
-    Route::get('/owner/employee', [OwnerController::class, 'Employee'])->name('owner.employee');
-    Route::get('/employees', [OwnerController::class, 'Employeeindex'])->name('employee.index');
+    Route::get('/owner/akun', [OwnerController::class, 'Akun'])->name('owner.akun');
+    Route::get('/owner/akun/detail/{id}', [OwnerController::class, 'ShowAkunDetail']);
+    Route::get('/owner/akun/detail/edit/{id}', [OwnerController::class, 'ShowAkunDetailEdit']);
+
+    Route::get('/owner/bye', [OwnerController::class, 'bye'])->name('owner.bye');
     Route::post('/owner/update-verification', [OwnerController::class, 'updateVerification'])->name('owner.updateVerification');
+    // Route::get('/owner/employee/edit', [OwnerController::class, 'ShowEmployeeEdit'])->name('employee.edit');
+    // Route::get('/owner/employee/edit/update', [OwnerController::class, 'Employeeupdate'])->name('employee.update');
+    // Route::get('/employees', [OwnerController::class, 'Employeeindex'])->name('employee.index');
 });
 
+//branch manager
 Route::middleware(['auth', 'verified', 'role:Branch Manager'])->group(function () {
     Route::get('/branchmanager/dashboard', [BranchManagerController::class, 'BranchManagerDashboard'])->name('branchmanager.dashboard');
 });
 
+//Cashier
 Route::middleware(['auth', 'verified', 'role:Cashier'])->group(function () {
     Route::get('/cashier/dashboard', [CashierController::class, 'CashierDashboard'])->name('cashier.dashboard');
 });
 
+// Production Officer
 Route::middleware(['auth', 'verified', 'role:Production Officer'])->group(function () {
     Route::get('/productionofficer/dashboard', [ProductionOfficerController::class, 'ProductionOfficerDashboard'])->name('productionofficer.dashboard');
 });
 
+// Logistic Officer
 Route::middleware(['auth', 'verified', 'role:Logistic Officer'])->group(function () {
     Route::get('/logisticofficer/dashboard', [LogisticOfficerController::class, 'LogisticOfficerDashboard'])->name('logisticofficer.dashboard');
 });

@@ -3,7 +3,8 @@
     <div class="app-brand demo">
         <a href="" class="app-brand-link">
             <span class="app-brand-logo demo">
-                <img src="../assets/img/abc_bakery\abc_bakery_logo.png" alt="Logo ABC Bakery" class="mr-0" width="45px">
+                <img src="{{ asset('assets/img/abc_bakery\abc_bakery_logo.png') }}" alt="Logo ABC Bakery" class="mr-0"
+                    width="45px">
             </span>
             <span class="app-brand-text demo menu-text fw-bolder ms-2">ABC Bakery</span>
         </a>
@@ -24,11 +25,11 @@
             </a>
         </li>
 
-        <!-- Employee -->
+        <!-- Akun -->
         <li class="menu-item">
-            <a href="/owner/employee" class="menu-link">
+            <a href="/owner/akun" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-group"></i>
-                <div data-i18n="Analytics">Employee</div>
+                <div data-i18n="Analytics">Akun</div>
             </a>
         </li>
 

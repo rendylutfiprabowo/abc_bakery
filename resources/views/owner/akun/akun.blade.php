@@ -26,7 +26,7 @@
 
                         </div>
                         <div class="col m-0 p-0">
-                            <form action="{{ route('owner.employee') }}" method="GET" class="d-flex">
+                            <form action="{{ route('owner.akun') }}" method="GET" class="d-flex">
                                 <input type="text" name="search" class="form-control me-2" placeholder="Cari"
                                     value="{{ request('search') }}">
                                 <button type="submit" class="btn btn-primary"><i
@@ -46,22 +46,18 @@
                         <th>Nama Karyawan</th>
                         <th>Posisi / Jabatan</th>
                         <th>Cabang</th>
-                        <th>Kota</th>
                         <th>Verifikasi Akun</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    @foreach ($employee as $item)
+                    @foreach ($akun as $item)
                         <tr class="text-left">
-                            <td class="text-center">{{ $employee->firstItem() + $loop->index }}</td>
+                            <td class="text-center">{{ $akun->firstItem() + $loop->index }}</td>
                             <td><i class="text-danger "></i> <strong>{{ $item->name }}</strong></td>
                             <td>{{ $item->role->name }}</td>
                             <td>
                                 {{ $item->cabang->name ?? '-' }}
-                            </td>
-                            <td>
-                                {{ $item->cabang->kota->kota ?? '-' }}
                             </td>
                             <td class="d-flex justify-content-center">
                                 <div class="form-check form-switch">
@@ -77,10 +73,10 @@
                                         <i class="bx bx-dots-vertical-rounded"></i>
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="javascript:void(0);"><i
-                                                class="bx bx-edit-alt me-1"></i>
-                                            Edit</a>
-                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i>
+                                        <a class="dropdown-item" href="{{ url('/owner/akun/detail/' . $item->id) }}"><i
+                                                class="bx bx-info-circle me-1"></i>
+                                            Detail</a>
+                                        <a class="dropdown-item" href="/owner/akun/delete"><i class="bx bx-trash me-1"></i>
                                             Delete</a>
                                     </div>
                                 </div>
@@ -93,9 +89,9 @@
                 <nav aria-label="Page navigation mb-0">
                     <ul class="pagination d-flex justify-content-center">
                         {{-- Tombol "First" --}}
-                        @if (!$employee->onFirstPage())
+                        @if (!$akun->onFirstPage())
                             <li class="page-item first">
-                                <a class="page-link" href="{{ $employee->url(1) }}">
+                                <a class="page-link" href="{{ $akun->url(1) }}">
                                     <i class="tf-icon bx bx-chevrons-left"></i>
                                 </a>
                             </li>
@@ -106,29 +102,29 @@
                         @endif
 
                         {{-- Tombol "Previous" --}}
-                        @if ($employee->onFirstPage())
+                        @if ($akun->onFirstPage())
                             <li class="page-item prev disabled">
                                 <span class="page-link"><i class="tf-icon bx bx-chevron-left"></i></span>
                             </li>
                         @else
                             <li class="page-item prev">
-                                <a class="page-link" href="{{ $employee->previousPageUrl() }}">
+                                <a class="page-link" href="{{ $akun->previousPageUrl() }}">
                                     <i class="tf-icon bx bx-chevron-left"></i>
                                 </a>
                             </li>
                         @endif
 
                         {{-- Nomor Halaman --}}
-                        @foreach ($employee->getUrlRange(1, $employee->lastPage()) as $page => $url)
-                            <li class="page-item {{ $employee->currentPage() == $page ? 'active' : '' }}">
+                        @foreach ($akun->getUrlRange(1, $akun->lastPage()) as $page => $url)
+                            <li class="page-item {{ $akun->currentPage() == $page ? 'active' : '' }}">
                                 <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                             </li>
                         @endforeach
 
                         {{-- Tombol "Next" --}}
-                        @if ($employee->hasMorePages())
+                        @if ($akun->hasMorePages())
                             <li class="page-item next">
-                                <a class="page-link" href="{{ $employee->nextPageUrl() }}">
+                                <a class="page-link" href="{{ $akun->nextPageUrl() }}">
                                     <i class="tf-icon bx bx-chevron-right"></i>
                                 </a>
                             </li>
@@ -139,9 +135,9 @@
                         @endif
 
                         {{-- Tombol "Last" --}}
-                        @if ($employee->hasMorePages())
+                        @if ($akun->hasMorePages())
                             <li class="page-item last">
-                                <a class="page-link" href="{{ $employee->url($employee->lastPage()) }}"><i
+                                <a class="page-link" href="{{ $akun->url($akun->lastPage()) }}"><i
                                         class="tf-icon bx bx-chevrons-right"></i>
                                 </a>
                             </li>
@@ -155,7 +151,7 @@
 
                 {{-- Informasi jumlah data --}}
                 <small class="divider divider-text mt-0">
-                    Menampilkan {{ $employee->firstItem() }} - {{ $employee->lastItem() }} dari {{ $employee->total() }}
+                    Menampilkan {{ $akun->firstItem() }} - {{ $akun->lastItem() }} dari {{ $akun->total() }}
                     data
                 </small>
             </div>
